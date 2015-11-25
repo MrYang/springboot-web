@@ -22,18 +22,10 @@
       </div>
 
       <div class="am-form-group">
-        <label for="user-email" class="am-u-sm-3 am-form-label">email</label>
-
-        <div class="am-u-sm-9">
-          <input type="email" id="user-email" name="email" placeholder="电子邮件 / Email" required>
-        </div>
-      </div>
-
-      <div class="am-form-group">
         <label for="user-password" class="am-u-sm-3 am-form-label">密码</label>
 
         <div class="am-u-sm-9">
-          <input type="password" id="user-password" name="plainPassword" placeholder="密码">
+          <input type="password" id="user-password" name="password" placeholder="密码">
         </div>
       </div>
 

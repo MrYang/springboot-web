@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") String id, Model model) {
+    public String show(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("user", user);
         return "user/show";
@@ -54,14 +54,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable("id") String id, Model model) {
+    public String edit(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("user", user);
         return "user/edit";
     }
 
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable("id") String id, User user, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable("id") Long id, User user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "user/edit";
         }
@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable("id") String id,
+    public String delete(@PathVariable("id") Long id,
                          RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
         userService.delete(id);
