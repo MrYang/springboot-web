@@ -19,9 +19,9 @@ buildscript {
     }
 }
 
-jar {
-    baseName = 'springboot-web'
-    version =  '0.1'
+war {
+    baseName = 'spring-boot-web'
+    version = '0.1'
 }
 
 repositories {
@@ -29,15 +29,34 @@ repositories {
 }
 
 dependencies {
-	compile "org.springframework.boot:spring-boot-starter-web"
-	compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-aop"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+
+//    compile "org.springframework.boot:spring-boot-starter-redis"
+//    compile "org.springframework.session:spring-session:1.0.2.RELEASE"
+
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+
+    compile "org.apache.shiro:shiro-spring:1.2.3"
+    compile "com.google.guava:guava:17.0"
+    compile "org.apache.commons:commons-lang3:3.4"
+    compile "commons-collections:commons-collections:3.2.1"
+    compile "commons-io:commons-io:2.4"
+    compile "commons-codec:commons-codec:1.10"
+    compile "joda-time:joda-time:2.8"
+    compile "org.quartz-scheduler:quartz:2.1.1"
+    compile "opensymphony:sitemesh:2.4.2"
 
     providedCompile "org.springframework.boot:spring-boot-starter-tomcat"
     providedCompile "org.apache.tomcat.embed:tomcat-embed-jasper"
-    providedCompile "javax.servlet:jstl"
+    compile "javax.servlet:jstl"
+    providedCompile "javax.servlet:javax.servlet-api"
 
-	runtime "mysql:mysql-connector-java:5.1.18"
-	
+    runtime "mysql:mysql-connector-java:5.1.18"
+
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
