@@ -14,7 +14,7 @@ public class ShiroRealmImpl extends AuthorizingRealm  {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addStringPermission("*:*");
+        info.addStringPermission("user:*");
         return info;
     }
 
