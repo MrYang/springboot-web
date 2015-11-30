@@ -2,6 +2,9 @@ package com.zz.springbootweb.controller;
 
 import com.zz.springbootweb.entity.User;
 import com.zz.springbootweb.service.UserService;
+import com.zz.springbootweb.utils.Constants;
+import com.zz.springbootweb.utils.SearchFilter;
+import com.zz.springbootweb.utils.Servlets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("user")
@@ -25,7 +29,8 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Pageable pageable, HttpServletRequest request, Model model) {
-        Page<User> users = userService.findAll(pageable);
+        Map<String, SearchFilter> filterMap = SearchFilter.parse(Servlets.getParametersStartingWith(request, Constants.SEARCH_PREFIX));
+        Page<User> users = userService.findPage(filterMap, pageable);
         model.addAttribute("users", users);
         return "user/list";
     }

@@ -2,12 +2,15 @@ package com.zz.springbootweb.service;
 
 import com.google.common.collect.Iterators;
 import com.zz.springbootweb.repository.BaseDao;
+import com.zz.springbootweb.utils.DynamicSpecifications;
+import com.zz.springbootweb.utils.SearchFilter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.io.Serializable;
 import java.util.*;
@@ -28,8 +31,13 @@ public abstract class BaseService<M, ID extends Serializable> {
         return models;
     }
 
+    public Page<M> findPage(Map<String, SearchFilter> filterMaps, Pageable pageable) {
+        Specification<M> specification = DynamicSpecifications.bySearchFilter(filterMaps.values());
+        return baseDao.findAll(specification, pageable);
+    }
 
-    public Page<M> findAll(Pageable pageable) {
+
+    public Page<M> findPage(Pageable pageable) {
         return baseDao.findAll(pageable);
     }
 
