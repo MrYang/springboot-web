@@ -5,6 +5,7 @@ import com.zz.springbootweb.service.UserService;
 import com.zz.springbootweb.utils.Constants;
 import com.zz.springbootweb.utils.SearchFilter;
 import com.zz.springbootweb.utils.Servlets;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequiresPermissions("user:list")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Pageable pageable, HttpServletRequest request, Model model) {
         Map<String, SearchFilter> filterMap = SearchFilter.parse(Servlets.getParametersStartingWith(request, Constants.SEARCH_PREFIX));
@@ -35,6 +37,7 @@ public class UserController {
         return "user/list";
     }
 
+    @RequiresPermissions("user:show")
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
@@ -42,11 +45,13 @@ public class UserController {
         return "user/show";
     }
 
+    @RequiresPermissions("user:create")
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String _new() {
         return "user/new";
     }
 
+    @RequiresPermissions("user:create")
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -58,6 +63,7 @@ public class UserController {
         return "redirect:/user/";
     }
 
+    @RequiresPermissions("user:update")
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
         User user = userService.get(id);
@@ -65,6 +71,7 @@ public class UserController {
         return "user/edit";
     }
 
+    @RequiresPermissions("user:update")
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") Long id, User user, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -77,6 +84,7 @@ public class UserController {
         return "redirect:/user/";
     }
 
+    @RequiresPermissions("user:delete")
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Long id,
                          RedirectAttributes redirectAttributes, HttpServletRequest request) {

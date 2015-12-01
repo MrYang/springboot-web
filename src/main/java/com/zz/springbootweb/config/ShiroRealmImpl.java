@@ -1,9 +1,6 @@
 package com.zz.springbootweb.config;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -20,6 +17,9 @@ public class ShiroRealmImpl extends AuthorizingRealm  {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        return new SimpleAuthenticationInfo("yxb", "111111", getName());
+        UsernamePasswordToken upt = (UsernamePasswordToken) token;
+        String username = upt.getUsername();
+        String password = String.valueOf(upt.getPassword());
+        return new SimpleAuthenticationInfo(username, password, getName());
     }
 }
