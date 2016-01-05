@@ -87,7 +87,7 @@ public class UserController {
     @RequiresPermissions("user:delete")
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Long id,
-                         RedirectAttributes redirectAttributes, HttpServletRequest request) {
+                         RedirectAttributes redirectAttributes) {
 
         userService.delete(id);
 
