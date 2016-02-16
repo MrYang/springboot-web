@@ -6,16 +6,15 @@
 
 该系统的一些的特性:
 
-1. 集成shiro
+1. 集成shiro,添加密码salt支持
 2. 集成sitemesh
 3. 添加自定义的interceptor
 4. 使用自定义的error页面，及自定义的异常处理
+5. 自定义的JpaSpecificationExecutor的查找, 其实也就是把springside中的类搞过来。
 
 需要添加完善的一些东西有：
 
-1. 增加shiro的salt支持
-2. 添加自定义的JpaSpecificationExecutor的查找, 其实也就是把springside中的类搞过来。
-3. 研究spring actuator，添加自定义的actuator.
-4. 其他的一些集成。
+1. 研究spring actuator，添加自定义的actuator.
+2. 其他的一些集成。
 
 

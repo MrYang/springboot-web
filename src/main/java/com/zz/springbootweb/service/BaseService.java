@@ -1,6 +1,7 @@
 package com.zz.springbootweb.service;
 
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Maps;
 import com.zz.springbootweb.repository.BaseDao;
 import com.zz.springbootweb.utils.DynamicSpecifications;
 import com.zz.springbootweb.utils.SearchFilter;
@@ -36,6 +37,12 @@ public abstract class BaseService<M, ID extends Serializable> {
         return baseDao.findAll(specification, pageable);
     }
 
+    public M findOne(String key, Object value) {
+        Map<String, SearchFilter> filters = Maps.newHashMap();
+        filters.put(key, new SearchFilter(key, SearchFilter.Operator.EQ, value));
+        Specification<M> specification = DynamicSpecifications.bySearchFilter(filters.values());
+        return baseDao.findOne(specification);
+    }
 
     public Page<M> findPage(Pageable pageable) {
         return baseDao.findAll(pageable);
